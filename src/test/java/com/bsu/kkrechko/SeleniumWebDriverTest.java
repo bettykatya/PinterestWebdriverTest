@@ -2,6 +2,7 @@ package com.bsu.kkrechko;
 
 import com.bsu.kkrechko.steps.Steps;
 import com.bsu.kkrechko.utils.Utils;
+import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -9,6 +10,7 @@ import org.testng.annotations.Test;
 
 public class SeleniumWebDriverTest {
     private Steps steps;
+    private final Logger logger = Logger.getLogger(SeleniumWebDriverTest.class);
     private final String USER_EMAIL = "pinterest.test@yandex.com";
     private final String PASSWORD = "pinterest123";
     private final String USER_NAME = "test";
@@ -22,12 +24,14 @@ public class SeleniumWebDriverTest {
 
     @Test(description = "Login to Github")
     public void oneCanLoginPinterest(){
+        logger.info("-----oneCanLoginPinterest");
         steps.loginPinterest(USER_EMAIL, PASSWORD);
         Assert.assertTrue(steps.isLoggedIn(USER_NAME));
     }
 
     @Test
     public void oneCanCreatePinboard(){
+        logger.info("-----oneCanCreatePinboard");
         steps.loginPinterest(USER_EMAIL, PASSWORD);
         String pinboardName = "testName" + Utils.getRandomString(5);
         String pinboardDescription = "testDescription" + Utils.getRandomString(5);
@@ -37,6 +41,7 @@ public class SeleniumWebDriverTest {
 
     @Test
     public void oneCanDeletePinboard(){
+        logger.info("-----oneCanDeletePinboard");
         String pinboardName = "testName" + Utils.getRandomString(5);
         String pinboardDescription = "testDescription" + Utils.getRandomString(5);
         steps.loginPinterest(USER_EMAIL, PASSWORD);
@@ -47,24 +52,23 @@ public class SeleniumWebDriverTest {
 
     @Test
     public void oneCanFindPin(){
+        logger.info("-----oneCanFindPin");
         steps.loginPinterest(USER_EMAIL, PASSWORD);
         Assert.assertTrue(steps.pinWithTextFound("swift"));
     }
 
     @Test
     public void oneCanPin(){
+        logger.info("-----oneCanPin");
+        steps.loginPinterest(USER_EMAIL,PASSWORD);
 
-    }
-
-/*    @Test
-    public void oneCanPinYoutubeVideo(){
-
+        Assert.assertTrue(steps.addRandomPin());
     }
 
     @AfterMethod(description = "Stop Browser")
     public void stopBrowser()
     {
         steps.closeDriver();
-    }*/
+    }
 
 }

@@ -31,6 +31,9 @@ public class UserPage extends Page {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement buttonCreatePinboard;
 
+    @FindBy(xpath = "//li//div[@class='Module PinCount']//span[1]")
+    private WebElement pinNumberLabel;
+
     public UserPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(this.driver, this);
@@ -62,5 +65,10 @@ public class UserPage extends Page {
             return false;
         }
         return true;
+    }
+
+    public int getNumberPins(){
+        int temp = Integer.parseInt(pinNumberLabel.getText());
+        return temp;
     }
 }

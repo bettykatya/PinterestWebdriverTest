@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MainPage extends Page{
+    private final Logger logger = Logger.getLogger(MainPage.class);
     private final String BASE_URL = "https://www.pinterest.com/";
 
     @FindBy(xpath = "//button[@class='Module UserNavigateButton merged']")
@@ -13,6 +14,12 @@ public class MainPage extends Page{
 
     @FindBy(xpath = "//input")
     private WebElement inputSearch;
+
+    @FindBy(xpath = "//div[@class='repinSendButtonWrapper']//button[1]")
+    private WebElement pinButton;
+
+    @FindBy(xpath = "//div[@class='BoardLabel Module pinCreate']//button[1]")
+    private WebElement pinButton2;
 
     public MainPage(WebDriver driver)
     {
@@ -33,7 +40,6 @@ public class MainPage extends Page{
     public void searchText(String text){
         inputSearch.sendKeys(text);
         inputSearch.sendKeys(Keys.ENTER);
-
     }
 
     public boolean pinIsFound(){
@@ -45,6 +51,11 @@ public class MainPage extends Page{
             return true;
         }
         return false;
+    }
+
+    public void addPin(){
+        pinButton.click();
+        pinButton2.click();
     }
 
 }

@@ -15,11 +15,13 @@ import java.util.concurrent.TimeUnit;
 public class Steps {
     private final Logger logger = Logger.getLogger(Steps.class);
     private WebDriver driver;
+    private int previousPinsNumber=0;
+    private int currentPinsNumber=0;
 
     public void initBrowser(){
         driver = new FirefoxDriver();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         logger.info("Browser started");
     }
 
@@ -75,5 +77,22 @@ public class Steps {
         return mainPage.pinIsFound();
     }
 
-
+    public boolean addRandomPin(){
+        UserPage up = new UserPage(driver);
+        up.openPage();
+        previousPinsNumber = up.getNumberPins();
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPage();
+        mainPage.addPin();
+        mainPage.openPage();
+        mainPage.clickUserPage();
+        UserPage userPage = new UserPage(driver);
+        currentPinsNumber = userPage.getNumberPins();
+        if(currentPinsNumber == previousPinsNumber+1){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
