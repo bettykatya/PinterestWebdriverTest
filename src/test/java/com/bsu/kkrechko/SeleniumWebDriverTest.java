@@ -65,6 +65,7 @@ public class SeleniumWebDriverTest {
         Assert.assertTrue(steps.addRandomPin());
     }
 
+    
     @AfterMethod(description = "Stop Browser")
     public void stopBrowser()
     {
