@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+
 public class SeleniumWebDriverTest {
     private Steps steps;
     private final Logger logger = Logger.getLogger(SeleniumWebDriverTest.class);
@@ -65,7 +66,6 @@ public class SeleniumWebDriverTest {
         Assert.assertTrue(steps.addRandomPin());
     }
 
-    
     @AfterMethod(description = "Stop Browser")
     public void stopBrowser()
     {
