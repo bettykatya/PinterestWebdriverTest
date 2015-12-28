@@ -6,9 +6,7 @@ import com.bsu.kkrechko.pages.PinboardPage;
 import com.bsu.kkrechko.pages.UserPage;
 import org.openqa.selenium.WebDriver;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
